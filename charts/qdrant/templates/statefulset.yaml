@@ -210,6 +210,12 @@ spec:
           configMap:
             name: {{ include "qdrant.fullname" . }}
             defaultMode: 0755
+        {{- if .Values.persistence.ephemeral }}
+        - name: qdrant-storage
+          emptyDir:
+            name: {{ include "qdrant.fullname" . }}
+            defaultMode: 0755 
+        {{- end}}
         {{- if .Values.snapshotRestoration.enabled }}
         - name: qdrant-snapshots
           persistentVolumeClaim:
@@ -229,6 +235,7 @@ spec:
         {{- if .Values.additionalVolumes }}
 {{- toYaml .Values.additionalVolumes | default "" | nindent 8 }}
         {{- end}}
+  {{- if not .Values.persistence.ephemeral }}
   volumeClaimTemplates:
     - metadata:
         name: qdrant-storage
@@ -247,3 +254,4 @@ spec:
         resources:
           requests:
             storage: {{ .Values.persistence.size | quote }}
+  {{- end}}
