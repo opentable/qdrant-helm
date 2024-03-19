@@ -13,10 +13,10 @@ maintainers:
     url: https://github.com/qdrant
 icon: https://qdrant.github.io/qdrant-helm/logo_with_text.svg
 type: application
-version: 0.8.0
-appVersion: v1.7.4
+version: 0.8.2
+appVersion: v1.8.2
 annotations:
   artifacthub.io/category: database
   artifacthub.io/changes: |
     - kind: added
-      description: Add option for ephemeral storage
+      description: Update Qdrant to v1.8.2
